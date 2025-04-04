@@ -4,16 +4,20 @@ import matplotlib.pyplot as plt
 import io
 import soundfile as sf
 
+st.set_page_config(page_title='Cut', page_icon=':notes:')
+st.title(":wrench: :hammer: :notes: :musical_note:")
+
 # Upload file
 uploaded_file = st.file_uploader("Tải file muốn cắt")
 
 if uploaded_file is not None:
     # Load audio using librosa
-    audio, sr = librosa.load(uploaded_file)
-    
-    # Calculate the duration in seconds and convert to minutes
-    duration_sec = len(audio) / sr
-    max_time = round(duration_sec / 60, 2)
+    with st.spinner("Chờ tí xíu đi", show_time=True):
+        audio, sr = librosa.load(uploaded_file)
+        
+        # Calculate the duration in seconds and convert to minutes
+        duration_sec = len(audio) / sr
+        max_time = round(duration_sec / 60, 2)
 
 
     if "start_time_input" not in st.session_state:
